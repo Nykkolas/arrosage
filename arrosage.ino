@@ -4,6 +4,8 @@
 
 Timer displayMesure = StartTimer(DISPLAY_DELAY);
 
+Arrosage arr = {StartTimer(DUREE_REPOS), false};
+
 void setup () {
     pinMode (BUTTON_PIN, INPUT);
     pinMode (VALVE_PIN, OUTPUT);
@@ -15,18 +17,28 @@ void setup () {
 }
 
 void loop () {
-    switch (digitalRead(BUTTON_PIN))
-    {
-    case LOW:
+    // Quand il est temps d'arroser, démarrer l'arrosage
+    if (!arr.enCours && digitalRead(CAPTEUR_PIN) && isTimerPassed(arr.dureeArrosage)) {
         digitalWrite(VALVE_PIN, HIGH);
+        arr.dureeArrosage = StartTimer (DUREE_ARROSAGE);
+        arr.enCours = true;
+    }
+
+    // Continuer à arroser jusqu'à ce que le Timer soit atteint
+    if (arr.enCours && isTimerPassed(arr.dureeArrosage)) {
+        digitalWrite(VALVE_PIN, LOW);
+        arr.dureeArrosage = StartTimer(DUREE_REPOS);
+        arr.enCours = false;
+    }
+
+    // Quand on appuie sur le bouton
+    if (!digitalRead(BUTTON_PIN))
+    {
         if (isTimerPassed(displayMesure)) {
-            Serial.println(analogRead(CAPTEUR_PIN));
+            Serial.print("Valeur du capteur : "); Serial.println(digitalRead(CAPTEUR_PIN));
+            Serial.print("En cours ? : "); Serial.println(arr.enCours);
+            Serial.print("Dernier changement d'état : "); Serial.println(arr.dureeArrosage.last);
             displayMesure = StartTimer(DISPLAY_DELAY);
         }
-        break;
-    
-    default:
-        digitalWrite(VALVE_PIN, LOW);
-        break;
     }
 }
