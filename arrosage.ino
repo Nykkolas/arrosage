@@ -1,9 +1,8 @@
 #include <Arduino.h>
-#include "conf.h"
 #include "Types.h"
 #include "Timer.h"
 
-Timer displayMesure = createTimer(DISPLAY_DELAY);
+Timer displayMesure = StartTimer(DISPLAY_DELAY);
 
 void setup () {
     pinMode (BUTTON_PIN, INPUT);
@@ -22,7 +21,7 @@ void loop () {
         digitalWrite(VALVE_PIN, HIGH);
         if (isTimerPassed(displayMesure)) {
             Serial.println(analogRead(CAPTEUR_PIN));
-            displayMesure = createTimer(DISPLAY_DELAY);
+            displayMesure = StartTimer(DISPLAY_DELAY);
         }
         break;
     

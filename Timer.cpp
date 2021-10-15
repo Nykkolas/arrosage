@@ -1,7 +1,7 @@
 #include "Timer.h"
 #include <Arduino.h>
 
-Timer createTimer (unsigned int duration) {
+Timer StartTimer (unsigned int duration) {
     Timer t = {duration, millis()};
 
     return  t;

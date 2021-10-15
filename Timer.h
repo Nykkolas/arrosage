@@ -3,7 +3,7 @@
 
 #include "Types.h"
 
-Timer createTimer (unsigned int duration);
+Timer StartTimer (unsigned int duration);
 bool isTimerPassed (Timer t);
 
 #endif
