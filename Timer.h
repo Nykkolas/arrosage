@@ -1,14 +1,9 @@
 #ifndef TIMER_H
 #define TIMER_H
 
-namespace Timer {
-    struct Timer {
-        unsigned int duration;
-        unsigned int last;
-    };
+#include "Types.h"
 
-    Timer create (unsigned int duration);
-    bool isPassed (Timer t);
-}
+Timer createTimer (unsigned int duration);
+bool isTimerPassed (Timer t);
 
 #endif
