@@ -7,7 +7,8 @@
 // Configuration de l'Arduino
 const unsigned int BUTTON_PIN = 2;
 const unsigned int VALVE_PIN = 9;
-const unsigned int CAPTEUR_PIN = A0;
+const unsigned int CAPTEUR_DIGITAL_PIN = A0;
+const unsigned int CAPTEUR_ANALOG_PIN = A1;
 
 // Configuration des délais pour le Timer
 const unsigned long DISPLAY_DELAY = 1000;
