@@ -4,19 +4,20 @@
 #include "Arrosage.h"
 
 Timer displayMesure = StartTimer(DISPLAY_DELAY);
-Arrosage arr = {StartTimer(DUREE_REPOS), false};
-
+Arrosage arr = {StartTimer(DUREE_REPOS), false, false};
 
 void interruptRising();
 void interruptFalling() {
     Serial.println("interrupt falling");
     arr = startArrosage(arr);
+    arr.boutonAppuye = true;
     attachInterrupt(digitalPinToInterrupt(BUTTON_PIN), interruptRising, RISING);
 }
 
 void interruptRising() {
     Serial.println("interrupt rising");
-    arr = stopArrosage(arr);
+    arr = stopArrosageAndResetTimer(arr);
+    arr.boutonAppuye = false;
     attachInterrupt(digitalPinToInterrupt(BUTTON_PIN), interruptFalling, FALLING);
 }
 
@@ -47,17 +48,17 @@ void loop () {
     };
 
     // On ne lance l'arrosage automatique que si le bouton n'est pas enfoncé
-    if (digitalRead(BUTTON_PIN))
+    if (!arr.boutonAppuye)
     {
         // Quand il est temps d'arroser, démarrer l'arrosage
-        if (!arr.enCours && digitalRead(CAPTEUR_DIGITAL_PIN) && isTimerPassed(arr.dureeArrosage)) {
+        if (!arr.enCours && isTimerPassed(arr.dureeArrosage) && digitalRead(CAPTEUR_DIGITAL_PIN)) {
             arr.dureeArrosage = StartTimer (DUREE_ARROSAGE);
             arr = startArrosage(arr);
         }
 
         // Continuer à arroser jusqu'à ce que le Timer soit atteint
         if (arr.enCours && isTimerPassed(arr.dureeArrosage)) {
-            arr = stopArrosage(arr);
+            arr = stopArrosageAndResetTimer(arr);
         }
     } else {
         log_status();

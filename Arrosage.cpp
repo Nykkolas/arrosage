@@ -11,7 +11,7 @@ Arrosage startArrosage(Arrosage arr) {
 };
 
 // Arrêter l'arrosage et relancer le timer de repos
-Arrosage stopArrosage(Arrosage arr) {
+Arrosage stopArrosageAndResetTimer(Arrosage arr) {
     digitalWrite(VALVE_PIN, LOW);
     arr.dureeArrosage = StartTimer(DUREE_REPOS);
     arr.enCours = false;

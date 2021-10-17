@@ -22,8 +22,9 @@ struct Timer {
 };
 
 struct Arrosage {
-    Timer dureeArrosage;
+    Timer dureeArrosage; // Durée d'arrosage et durée sans arrosage après avoir arrosé
     bool enCours;
+    bool boutonAppuye; // Pour éviter de tester BUTTON_PIN à chaque loop. Changé lors des interruptions
 };
 
 #endif
