@@ -16,7 +16,7 @@ void interruptFalling() {
 
 void interruptRising() {
     Serial.println("interrupt rising");
-    arr = stopArrosageAndResetTimer(arr);
+    arr = stopArrosage(arr);
     arr.boutonAppuye = false;
     attachInterrupt(digitalPinToInterrupt(BUTTON_PIN), interruptFalling, FALLING);
 }
@@ -52,13 +52,12 @@ void loop () {
     {
         // Quand il est temps d'arroser, démarrer l'arrosage
         if (!arr.enCours && isTimerPassed(arr.dureeArrosage) && digitalRead(CAPTEUR_DIGITAL_PIN)) {
-            arr.dureeArrosage = StartTimer (DUREE_ARROSAGE);
             arr = startArrosage(arr);
         }
 
         // Continuer à arroser jusqu'à ce que le Timer soit atteint
         if (arr.enCours && isTimerPassed(arr.dureeArrosage)) {
-            arr = stopArrosageAndResetTimer(arr);
+            arr = stopArrosage(arr);
         }
     } else {
         log_status();

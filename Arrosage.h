@@ -4,6 +4,6 @@
 #include "Types.h"
 
 Arrosage startArrosage(Arrosage arr);
-Arrosage stopArrosageAndResetTimer(Arrosage arr);
+Arrosage stopArrosage(Arrosage arr);
 
 #endif
