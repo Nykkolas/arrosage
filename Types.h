@@ -5,7 +5,8 @@
 
 // Consts
 // Configuration de l'Arduino
-const unsigned int BUTTON_PIN = 2;
+const unsigned int BTN_FORCAGE_PIN = 2;
+const unsigned int BTN_STATUS_PIN = 3;
 const unsigned int VALVE_PIN = 9;
 const unsigned int CAPTEUR_DIGITAL_PIN = A0;
 const unsigned int CAPTEUR_ANALOG_PIN = A1;
