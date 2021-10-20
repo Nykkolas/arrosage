@@ -31,7 +31,8 @@ void interruptRising() {
 }
 
 void setup () {
-    pinMode (BTN_FORCAGE_PIN, INPUT);
+    pinMode (BTN_FORCAGE_PIN, INPUT_PULLUP);
+    pinMode (BTN_STATUS_PIN, INPUT_PULLUP);
     pinMode (VALVE_PIN, OUTPUT);
     pinMode (CAPTEUR_DIGITAL_PIN, INPUT);
 
