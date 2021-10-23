@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name arrosage-rescue)(type Legacy)(uri ${KIPRJMOD}/arrosage-rescue.lib)(options "")(descr ""))
+)
