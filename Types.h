@@ -13,7 +13,7 @@ const unsigned int CAPTEUR_ANALOG_PIN = A1;
 
 // Configuration des délais pour le Timer
 const unsigned long DISPLAY_DELAY = 1000;
-const unsigned long DUREE_ARROSAGE = 5000;
+const unsigned long DUREE_ARROSAGE = 5000; // 5s = environ 1 verre
 const unsigned long DUREE_REPOS = 10000;
 
 // Types
